@@ -1,237 +1,266 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <title>Form Input Nota – Minamarket Bangunan Pilar</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f6f8;
-      margin: 0;
-      padding: 20px;
-    }
-    h1 {
-      text-align: center;
-    }
-    .container {
-      max-width: 900px;
-      margin: auto;
-      background: #fff;
-      padding: 20px;
-      border-radius: 8px;
-    }
-    label {
-      font-weight: bold;
-      display: block;
-      margin-top: 12px;
-    }
-    input, select, textarea {
-      width: 100%;
-      padding: 8px;
-      margin-top: 4px;
-      box-sizing: border-box;
-    }
-    textarea {
-      min-height: 160px;
-    }
-    .row {
-      display: flex;
-      gap: 10px;
-    }
-    .row > div {
-      flex: 1;
-    }
-    button {
-      margin-top: 20px;
-      padding: 10px 16px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    .output {
-      background: #f0f0f0;
-      white-space: pre-wrap;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Financial Freedom.id - Form Online Input Nota</title>
+
+<style>
+:root{
+  --bg-main:#0f2a33;
+  --bg-card:#1e3a43;
+  --bg-input:#f4f7f8;
+  --accent:#2ec4ff;
+  --text-light:#e9f1f4;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Segoe UI,Arial,sans-serif;
+  background:linear-gradient(180deg,#0b1f26,#12343d);
+  color:var(--text-light);
+}
+
+.wrapper{
+  max-width:1000px;
+  margin:40px auto;
+  padding:30px;
+  background:var(--bg-card);
+  border-radius:16px;
+  box-shadow:0 20px 40px rgba(0,0,0,.35);
+}
+
+h1{
+  text-align:center;
+  margin:0 0 25px;
+  font-size:24px;
+}
+
+h1 span{
+  opacity:.8;
+  font-size:14px;
+  display:block;
+  margin-top:6px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+
+.grid-2{grid-column:span 2}
+.grid-4{grid-column:span 4}
+
+label{
+  font-size:12px;
+  opacity:.85;
+}
+
+input,select,textarea{
+  width:100%;
+  padding:10px;
+  border-radius:8px;
+  border:none;
+  background:var(--bg-input);
+  font-size:14px;
+}
+
+textarea{min-height:90px}
+
+button{
+  margin-top:20px;
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:10px;
+  font-size:16px;
+  font-weight:600;
+  background:linear-gradient(90deg,#00c6ff,#0072ff);
+  color:#fff;
+  cursor:pointer;
+}
+
+button:hover{opacity:.9}
+
+.output{
+  background:#07181f;
+  color:#e6f6ff;
+  border-radius:10px;
+  padding:15px;
+  min-height:130px;
+  white-space:pre-wrap;
+  font-size:13px;
+}
+
+.section-title{
+  margin:30px 0 10px;
+  font-weight:600;
+}
+
+footer{
+  text-align:center;
+  margin-top:25px;
+  font-size:12px;
+  opacity:.7;
+}
+</style>
 </head>
+
 <body>
 
-  <h1>Form Input Nota Barang Masuk</h1>
+<div class="wrapper">
+  <h1>📄 Form Online Input Nota
+    <span>Financial Freedom.id</span>
+  </h1>
 
-  <div class="container">
+  <div class="grid">
 
-    <!-- DATA NOTA -->
-    <label>Nama Supplier</label>
-    <input id="supplier" value="UD DWI PUTRA">
-
-    <label>Nomor Nota</label>
-    <input id="noNota" value="-">
-
-    <div class="row">
-      <div>
-        <label>Tanggal Nota</label>
-        <input type="date" id="tglNota">
-      </div>
-      <div>
-        <label>Barang Datang</label>
-        <input type="date" id="tglDatang">
-      </div>
+    <div>
+      <label>Nama Supplier</label>
+      <input id="supplier" value="UD DWI PUTRA">
     </div>
 
-    <label>Sistem Pembayaran</label>
-    <select id="sistemPembayaran" onchange="toggleTempo()">
-      <option value="CASH">CASH</option>
-      <option value="TEMPO">TEMPO</option>
-    </select>
+    <div>
+      <label>No. Nota</label>
+      <input id="noNota" value="-">
+    </div>
 
-    <label>Masa Tempo (jika TEMPO)</label>
-    <select id="masaTempo" disabled>
-      <option value="1">1 Hari</option>
-      <option value="14">14 Hari</option>
-      <option value="30">30 Hari</option>
-      <option value="45">45 Hari</option>
-    </select>
+    <div>
+      <label>Tanggal Nota</label>
+      <input type="date" id="tglNota">
+    </div>
 
-    <label>Deskripsi Barang</label>
-    <input id="barang" value="0,5 COLT PILAR PASIR AYAK">
+    <div>
+      <label>Barang Datang</label>
+      <input type="date" id="tglDatang">
+    </div>
 
-    <label>Keterangan Konversi</label>
-    <input id="konversi" value="LANGSUNG DIKONVERSI MENJADI 29 ZAK">
+    <div class="grid-2">
+      <label>Deskripsi Barang</label>
+      <input id="barang" value="0,5 COLT PILAR PASIR AYAK">
+    </div>
 
-    <!-- PETUGAS -->
-    <label>Checker</label>
-    <input id="checker" value="IVAN & PAK ENDAH">
+    <div>
+      <label>Sistem Pembayaran</label>
+      <select id="sistemPembayaran" onchange="toggleTempo()">
+        <option value="CASH">CASH</option>
+        <option value="TEMPO">TEMPO</option>
+      </select>
+    </div>
 
-    <label>Verifikator</label>
-    <input id="verifikator" value="INDRA">
+    <div>
+      <label>Masa Tempo</label>
+      <select id="masaTempo" disabled>
+        <option value="1">1 Hari</option>
+        <option value="14">14 Hari</option>
+        <option value="30">30 Hari</option>
+        <option value="45">45 Hari</option>
+      </select>
+    </div>
 
-    <label>Petugas Display</label>
-    <input id="display">
+    <div>
+      <label>Checker</label>
+      <input id="checker">
+    </div>
 
-    <label>PIC Packing</label>
-    <input id="packing" value="IVAN DAN PAK ENDAH">
+    <div>
+      <label>Verifikator</label>
+      <input id="verifikator">
+    </div>
 
-    <!-- NILAI -->
-    <label>Nilai Nota</label>
-    <input type="number" id="nilaiNota" value="175000">
+    <div>
+      <label>PIC Packing</label>
+      <input id="packing">
+    </div>
 
-    <label>PPN</label>
-    <input type="number" id="ppn" value="0">
+    <div>
+      <label>Nilai Nota</label>
+      <input type="number" id="nilaiNota" value="0">
+    </div>
 
-    <label>Biaya Packing / Angkut / Bifast</label>
-    <input type="number" id="biaya" value="0">
+    <div>
+      <label>PPN</label>
+      <input type="number" id="ppn" value="0">
+    </div>
 
-    <label>Retur (Barang Tidak Sesuai)</label>
-    <input type="number" id="retur1" value="0">
+    <div>
+      <label>Biaya</label>
+      <input type="number" id="biaya" value="0">
+    </div>
 
-    <label>Retur (Barang Kurang Lengkap)</label>
-    <input type="number" id="retur2" value="0">
+    <div>
+      <label>Discount (%)</label>
+      <input type="number" id="discB" value="0">
+    </div>
 
-    <label>Discount A</label>
-    <input type="number" id="discA" value="0">
-
-    <label>Discount B (%)</label>
-    <input type="number" id="discB" value="15">
-
-    <label>Keterangan</label>
-    <textarea id="keterangan"></textarea>
-
-    <button onclick="generate()">Generate Laporan</button>
-
-    <!-- OUTPUT -->
-    <h3>Laporan WhatsApp</h3>
-    <textarea id="outputWA" class="output"></textarea>
-
-    <h3>Laporan Sistem</h3>
-    <textarea id="outputSistem" class="output"></textarea>
+    <div class="grid-4">
+      <label>Keterangan</label>
+      <textarea id="keterangan"></textarea>
+    </div>
 
   </div>
 
+  <button onclick="generate()">✅ Buat Laporan</button>
+
+  <div class="section-title">📱 Laporan WhatsApp</div>
+  <div id="outputWA" class="output"></div>
+
+  <div class="section-title">🗂️ Laporan Sistem</div>
+  <div id="outputSistem" class="output"></div>
+
+  <footer>
+    Financial Freedom.id • Sistem Form Online Input Nota
+  </footer>
+</div>
+
 <script>
-function toggleTempo() {
-  const sp = document.getElementById("sistemPembayaran").value;
-  document.getElementById("masaTempo").disabled = (sp === "CASH");
+function toggleTempo(){
+  masaTempo.disabled = sistemPembayaran.value === "CASH";
 }
 
-function formatTanggal(dateStr) {
-  if (!dateStr) return "-";
-  const bulan = [
-    "JANUARI","FEBRUARI","MARET","APRIL","MEI","JUNI",
-    "JULI","AGUSTUS","SEPTEMBER","OKTOBER","NOVEMBER","DESEMBER"
-  ];
-  const d = new Date(dateStr);
-  return d.getDate() + " " + bulan[d.getMonth()] + " " + d.getFullYear();
+function formatTanggal(d){
+  if(!d) return "-";
+  const b=["JAN","FEB","MAR","APR","MEI","JUN","JUL","AGU","SEP","OKT","NOV","DES"];
+  const x=new Date(d);
+  return x.getDate()+" "+b[x.getMonth()]+" "+x.getFullYear();
 }
 
-function hitungJatuhTempo() {
-  const sp = sistemPembayaran.value;
-  if (sp === "CASH") return "LUNAS";
+function generate(){
+  const jt = sistemPembayaran.value==="CASH"
+    ? "LUNAS"
+    : formatTanggal(new Date(new Date(tglNota.value).setDate(
+        new Date(tglNota.value).getDate()+parseInt(masaTempo.value)
+      )));
 
-  const tgl = new Date(tglNota.value);
-  const hari = parseInt(masaTempo.value);
-  tgl.setDate(tgl.getDate() + hari);
-  return formatTanggal(tgl.toISOString().slice(0,10));
-}
-
-function generate() {
   const netto =
     Number(nilaiNota.value)
-    - Number(retur1.value)
-    - Number(retur2.value)
-    - Number(discA.value)
-    - (Number(nilaiNota.value) * Number(discB.value) / 100)
+    - (Number(nilaiNota.value)*Number(discB.value)/100)
     + Number(ppn.value)
     + Number(biaya.value);
 
-  const jatuhTempo = hitungJatuhTempo();
-
-  const wa = `*MINIMARKET BANGUNAN PILAR*
-*JL Sunan Kudus, Gatak, Rukeman, Tamantirto, Bantul, DIY*
-════════════════════════════
-════════════════════════════
-
+  outputWA.innerText =
+`*MINIMARKET BANGUNAN PILAR*
 *LAPORAN INPUT BARANG MASUK*
-*Tanggal :* ${formatTanggal(new Date().toISOString().slice(0,10))}
 
 (${supplier.value}) (NO.NOTA : ${noNota.value})
 ${barang.value}
-(TGL NOTA : ${formatTanggal(tglNota.value)})
-(BARANG DATANG : ${formatTanggal(tglDatang.value)})
-(SISTEM PEMBAYARAN : ${sistemPembayaran.value})
-(TGL JATUH TEMPO : ${jatuhTempo})
+TGL NOTA : ${formatTanggal(tglNota.value)}
+BARANG DATANG : ${formatTanggal(tglDatang.value)}
+SISTEM PEMBAYARAN : ${sistemPembayaran.value}
+JATUH TEMPO : ${jt}
 
-CHECKER : ${checker.value}
-VERIFIKATOR : ${verifikator.value}
-PETUGAS DISPLAY : ${display.value}
-${konversi.value}
-(PIC PACKING : ${packing.value})
+Nilai Nota : Rp.${nilaiNota.value}
+Nilai Netto : Rp.${netto}
 
-*Nilai Nota :* Rp.${nilaiNota.value}
-*PPN :* Rp.${ppn.value}
-*Biaya Packing/ Angkut/ Bifast :* Rp.${biaya.value}
-*Retur (Barang Tidak Sesuai):* Rp.${retur1.value}
-*Retur (Barang Kurang Lengkap):* Rp.${retur2.value}
-*Discount A:* Rp.${discA.value}
-*Discount B:* ${discB.value}%
-*Nilai Nota Netto:* Rp.${netto}
+Keterangan : ${keterangan.value}`;
 
-*Jatuh Tempo:* *${jatuhTempo}*
-
-*Keterangan:* ${keterangan.value}`;
-
-  const sistem = `(${supplier.value}) (NO.NOTA : ${noNota.value})
-${barang.value}
-(TGL NOTA : ${formatTanggal(tglNota.value)})
-(BARANG DATANG : ${formatTanggal(tglDatang.value)})
-(SISTEM PEMBAYARAN : ${sistemPembayaran.value})
-(TGL JATUH TEMPO : ${jatuhTempo})
-
-CHECKER : ${checker.value}
-VERIFIKATOR : ${verifikator.value}
-PETUGAS DISPLAY : ${display.value}
-PIC PACKING : ${packing.value}`;
-
-  outputWA.value = wa;
-  outputSistem.value = sistem;
+  outputSistem.innerText =
+`(${supplier.value}) | ${barang.value}
+TGL NOTA : ${formatTanggal(tglNota.value)}
+JATUH TEMPO : ${jt}
+NETTO : Rp.${netto}`;
 }
 </script>
 
