@@ -9,7 +9,6 @@
   --bg:#0f2a33;
   --card:#1e3a43;
   --input:#f4f7f8;
-  --accent:#2ec4ff;
   --text:#e9f1f4;
 }
 
@@ -66,7 +65,7 @@ input,select,textarea{
   font-size:14px;
 }
 
-textarea{min-height:90px}
+textarea{min-height:120px}
 
 button{
   margin-top:20px;
@@ -80,8 +79,6 @@ button{
   color:#fff;
   cursor:pointer;
 }
-
-button:hover{opacity:.9}
 
 .output{
   background:#07181f;
@@ -169,7 +166,7 @@ footer{
 
 <div class="col-2" id="supplierManualBox" style="display:none">
 <label>Supplier Non Registrasi</label>
-<input id="supplierManual" placeholder="Ketik nama supplier">
+<input id="supplierManual">
 </div>
 
 <div>
@@ -187,9 +184,10 @@ footer{
 <input type="date" id="tglDatang">
 </div>
 
-<div class="col-2">
-<label>Nama / Deskripsi Barang</label>
-<input id="barang">
+<!-- BARANG + JUMLAH -->
+<div class="col-4">
+<label>Jumlah + Nama Barang (1 baris = 1 item)</label>
+<textarea id="barang" placeholder="29 ZAK PASIR AYAK&#10;10 BATANG BESI 10 MM&#10;5 SAK SEMEN"></textarea>
 </div>
 
 <div>
@@ -208,21 +206,6 @@ footer{
 <option value="30">30 Hari</option>
 <option value="45">45 Hari</option>
 </select>
-</div>
-
-<div>
-<label>Checker</label>
-<input id="checker">
-</div>
-
-<div>
-<label>Verifikator</label>
-<input id="verifikator">
-</div>
-
-<div>
-<label>PIC Packing</label>
-<input id="packing">
 </div>
 
 <div>
@@ -289,6 +272,14 @@ function formatTanggal(d){
   return x.getDate()+" "+b[x.getMonth()]+" "+x.getFullYear();
 }
 
+function formatBarang(){
+  return barang.value
+    .split(/\n|,/)
+    .map(x=>x.trim())
+    .filter(x=>x!=="")
+    .join(", ");
+}
+
 function generate(){
   const jatuhTempo =
     sistemPembayaran.value==="CASH"
@@ -302,12 +293,14 @@ function generate(){
     + Number(ppn.value)
     + Number(biaya.value);
 
+  const daftarBarang = formatBarang();
+
   outputWA.innerText =
 `*MINIMARKET BANGUNAN PILAR*
 *LAPORAN INPUT BARANG MASUK*
 
 (${getSupplier()}) (NO.NOTA : ${noNota.value})
-${barang.value}
+${daftarBarang}
 
 TGL NOTA : ${formatTanggal(tglNota.value)}
 BARANG DATANG : ${formatTanggal(tglDatang.value)}
@@ -322,7 +315,7 @@ ${keterangan.value}`;
 
   outputSistem.innerText =
 `SUPPLIER : ${getSupplier()}
-BARANG   : ${barang.value}
+BARANG   : ${daftarBarang}
 TGL NOTA : ${formatTanggal(tglNota.value)}
 JATUH TEMPO : ${jatuhTempo}
 NETTO : Rp.${netto}`;
