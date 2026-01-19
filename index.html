@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Form Input Nota – Minamarket Bangunan Pilar</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 12px;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 4px;
+      box-sizing: border-box;
+    }
+    textarea {
+      min-height: 160px;
+    }
+    .row {
+      display: flex;
+      gap: 10px;
+    }
+    .row > div {
+      flex: 1;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 16px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .output {
+      background: #f0f0f0;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Form Input Nota Barang Masuk</h1>
+
+  <div class="container">
+
+    <!-- DATA NOTA -->
+    <label>Nama Supplier</label>
+    <input id="supplier" value="UD DWI PUTRA">
+
+    <label>Nomor Nota</label>
+    <input id="noNota" value="-">
+
+    <div class="row">
+      <div>
+        <label>Tanggal Nota</label>
+        <input type="date" id="tglNota">
+      </div>
+      <div>
+        <label>Barang Datang</label>
+        <input type="date" id="tglDatang">
+      </div>
+    </div>
+
+    <label>Sistem Pembayaran</label>
+    <select id="sistemPembayaran" onchange="toggleTempo()">
+      <option value="CASH">CASH</option>
+      <option value="TEMPO">TEMPO</option>
+    </select>
+
+    <label>Masa Tempo (jika TEMPO)</label>
+    <select id="masaTempo" disabled>
+      <option value="1">1 Hari</option>
+      <option value="14">14 Hari</option>
+      <option value="30">30 Hari</option>
+      <option value="45">45 Hari</option>
+    </select>
+
+    <label>Deskripsi Barang</label>
+    <input id="barang" value="0,5 COLT PILAR PASIR AYAK">
+
+    <label>Keterangan Konversi</label>
+    <input id="konversi" value="LANGSUNG DIKONVERSI MENJADI 29 ZAK">
+
+    <!-- PETUGAS -->
+    <label>Checker</label>
+    <input id="checker" value="IVAN & PAK ENDAH">
+
+    <label>Verifikator</label>
+    <input id="verifikator" value="INDRA">
+
+    <label>Petugas Display</label>
+    <input id="display">
+
+    <label>PIC Packing</label>
+    <input id="packing" value="IVAN DAN PAK ENDAH">
+
+    <!-- NILAI -->
+    <label>Nilai Nota</label>
+    <input type="number" id="nilaiNota" value="175000">
+
+    <label>PPN</label>
+    <input type="number" id="ppn" value="0">
+
+    <label>Biaya Packing / Angkut / Bifast</label>
+    <input type="number" id="biaya" value="0">
+
+    <label>Retur (Barang Tidak Sesuai)</label>
+    <input type="number" id="retur1" value="0">
+
+    <label>Retur (Barang Kurang Lengkap)</label>
+    <input type="number" id="retur2" value="0">
+
+    <label>Discount A</label>
+    <input type="number" id="discA" value="0">
+
+    <label>Discount B (%)</label>
+    <input type="number" id="discB" value="15">
+
+    <label>Keterangan</label>
+    <textarea id="keterangan"></textarea>
+
+    <button onclick="generate()">Generate Laporan</button>
+
+    <!-- OUTPUT -->
+    <h3>Laporan WhatsApp</h3>
+    <textarea id="outputWA" class="output"></textarea>
+
+    <h3>Laporan Sistem</h3>
+    <textarea id="outputSistem" class="output"></textarea>
+
+  </div>
+
+<script>
+function toggleTempo() {
+  const sp = document.getElementById("sistemPembayaran").value;
+  document.getElementById("masaTempo").disabled = (sp === "CASH");
+}
+
+function formatTanggal(dateStr) {
+  if (!dateStr) return "-";
+  const bulan = [
+    "JANUARI","FEBRUARI","MARET","APRIL","MEI","JUNI",
+    "JULI","AGUSTUS","SEPTEMBER","OKTOBER","NOVEMBER","DESEMBER"
+  ];
+  const d = new Date(dateStr);
+  return d.getDate() + " " + bulan[d.getMonth()] + " " + d.getFullYear();
+}
+
+function hitungJatuhTempo() {
+  const sp = sistemPembayaran.value;
+  if (sp === "CASH") return "LUNAS";
+
+  const tgl = new Date(tglNota.value);
+  const hari = parseInt(masaTempo.value);
+  tgl.setDate(tgl.getDate() + hari);
+  return formatTanggal(tgl.toISOString().slice(0,10));
+}
+
+function generate() {
+  const netto =
+    Number(nilaiNota.value)
+    - Number(retur1.value)
+    - Number(retur2.value)
+    - Number(discA.value)
+    - (Number(nilaiNota.value) * Number(discB.value) / 100)
+    + Number(ppn.value)
+    + Number(biaya.value);
+
+  const jatuhTempo = hitungJatuhTempo();
+
+  const wa = `*MINIMARKET BANGUNAN PILAR*
+*JL Sunan Kudus, Gatak, Rukeman, Tamantirto, Bantul, DIY*
+════════════════════════════
+════════════════════════════
+
+*LAPORAN INPUT BARANG MASUK*
+*Tanggal :* ${formatTanggal(new Date().toISOString().slice(0,10))}
+
+(${supplier.value}) (NO.NOTA : ${noNota.value})
+${barang.value}
+(TGL NOTA : ${formatTanggal(tglNota.value)})
+(BARANG DATANG : ${formatTanggal(tglDatang.value)})
+(SISTEM PEMBAYARAN : ${sistemPembayaran.value})
+(TGL JATUH TEMPO : ${jatuhTempo})
+
+CHECKER : ${checker.value}
+VERIFIKATOR : ${verifikator.value}
+PETUGAS DISPLAY : ${display.value}
+${konversi.value}
+(PIC PACKING : ${packing.value})
+
+*Nilai Nota :* Rp.${nilaiNota.value}
+*PPN :* Rp.${ppn.value}
+*Biaya Packing/ Angkut/ Bifast :* Rp.${biaya.value}
+*Retur (Barang Tidak Sesuai):* Rp.${retur1.value}
+*Retur (Barang Kurang Lengkap):* Rp.${retur2.value}
+*Discount A:* Rp.${discA.value}
+*Discount B:* ${discB.value}%
+*Nilai Nota Netto:* Rp.${netto}
+
+*Jatuh Tempo:* *${jatuhTempo}*
+
+*Keterangan:* ${keterangan.value}`;
+
+  const sistem = `(${supplier.value}) (NO.NOTA : ${noNota.value})
+${barang.value}
+(TGL NOTA : ${formatTanggal(tglNota.value)})
+(BARANG DATANG : ${formatTanggal(tglDatang.value)})
+(SISTEM PEMBAYARAN : ${sistemPembayaran.value})
+(TGL JATUH TEMPO : ${jatuhTempo})
+
+CHECKER : ${checker.value}
+VERIFIKATOR : ${verifikator.value}
+PETUGAS DISPLAY : ${display.value}
+PIC PACKING : ${packing.value}`;
+
+  outputWA.value = wa;
+  outputSistem.value = sistem;
+}
+</script>
+
+</body>
+</html>
