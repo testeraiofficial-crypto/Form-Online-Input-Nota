@@ -59,6 +59,12 @@ button{
   white-space:pre-wrap;
   font-size:13px;
 }
+
+.copy-btn{
+  background:#25D366;
+  margin-top:10px;
+}
+
 footer{text-align:center;margin-top:25px;font-size:12px;opacity:.7}
 </style>
 </head>
@@ -94,7 +100,7 @@ footer{text-align:center;margin-top:25px;font-size:12px;opacity:.7}
 </div>
 
 <div class="col-4">
-<label>Jumlah + Nama Barang (1 baris = 1 item)</label>
+<label>Jumlah + Nama Barang (pisahkan koma / baris)</label>
 <textarea id="barang"></textarea>
 </div>
 
@@ -193,14 +199,20 @@ footer{text-align:center;margin-top:25px;font-size:12px;opacity:.7}
 
 </div>
 
-<button onclick="buatLaporan()">BUAT LAPORAN WHATSAPP</button>
-
+<h3>📱 Preview Laporan WhatsApp</h3>
 <div class="output" id="hasil"></div>
+
+<button class="copy-btn" onclick="copyWA()">📋 Copy ke Clipboard</button>
 
 <footer>Financial Freedom.id</footer>
 </div>
 
 <script>
+/* ===== HEADER TOKO DI-LOCK ===== */
+const HEADER_TOKO = `*MINIMARKET BANGUNAN PILAR*
+*Jl. Sunan Kudus, Gatak, Rukeman, Tamantirto, Bantul, DIY*
+*═══════════════*`;
+
 function toggleTempo(){
   masaTempo.disabled = sistem.value==="CASH";
 }
@@ -216,7 +228,7 @@ function barangFormat(){
   return barang.value.split(/\n|,/).map(x=>x.trim()).filter(x=>x).join(", ");
 }
 
-function buatLaporan(){
+function generateWA(){
   const jt = sistem.value==="CASH"
     ? "LUNAS"
     : tglIndo(new Date(new Date(tglNota.value).setDate(new Date(tglNota.value).getDate()+parseInt(masaTempo.value))));
@@ -232,9 +244,16 @@ function buatLaporan(){
     + Number(devFee.value);
 
   hasil.innerText =
-`*LAPORAN INPUT BARANG MASUK*
+`${HEADER_TOKO}
+
+*LAPORAN INPUT BARANG MASUK*
+
 *Tanggal :* ${tglIndo(tglLaporan.value)}
+
+
 (${supplier.value}) (NO.NOTA : ${noNota.value}) ${barangFormat()} (TGL NOTA : ${tglIndo(tglNota.value)}) (BARANG DATANG : ${tglIndo(tglDatang.value)}) ( SISTEM PEMBAYARAN : ${sistem.value}) (TGL JATUH TEMPO : ${jt}) CHECKER : ${checker.value} VERIFIKATOR : ${verifikator.value} PETUGAS DISPLAY : ${display.value})(PIC PACKING : ${packing.value})
+
+
 *Nilai Nota :* Rp.${nilaiNota.value}
 *PPN :*
 *Biaya Packing/ Angkut/ Bifast :* Rp.${biaya.value}
@@ -244,9 +263,25 @@ function buatLaporan(){
 *Discount B:* ${discB.value}% = Rp.0
 *Nilai Nota Netto*: Rp.${netto}
 *Development Fee :* Rp.${devFee.value}
+
+
 *Nilai Nota Terinput Sistem :* Rp.${netto}
+
+
 *Jatuh Tempo:* *${jt}*
+
+
 *Keterangan:* ${ket.value}`;
+}
+
+/* ===== PREVIEW REALTIME ===== */
+document.querySelectorAll("input, textarea, select")
+.forEach(el => el.addEventListener("input", generateWA));
+
+/* ===== COPY CLIPBOARD ===== */
+function copyWA(){
+  navigator.clipboard.writeText(hasil.innerText)
+    .then(()=>alert("Laporan WhatsApp berhasil dicopy!"));
 }
 </script>
 
