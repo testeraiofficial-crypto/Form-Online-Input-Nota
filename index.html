@@ -254,25 +254,24 @@ function generateWA(){
 (${supplier.value}) (NO.NOTA : ${noNota.value}) ${barangFormat()} (TGL NOTA : ${tglIndo(tglNota.value)}) (BARANG DATANG : ${tglIndo(tglDatang.value)}) ( SISTEM PEMBAYARAN : ${sistem.value}) (TGL JATUH TEMPO : ${jt}) CHECKER : ${checker.value} VERIFIKATOR : ${verifikator.value} PETUGAS DISPLAY : ${display.value})(PIC PACKING : ${packing.value})
 
 
-*Nilai Nota :* Rp.${nilaiNota.value}
+*Nilai Nota :* ${rupiah(nilaiNota.value)}
 *PPN :*
-*Biaya Packing/ Angkut/ Bifast :* Rp.${biaya.value}
-*Retur (Barang Tidak Sesuai):* Rp.${retur1.value}
-*Retur (Barang Kurang Lengkap):* Rp.${retur2.value}
-*Discount A:* Rp.${discA.value}
-*Discount B:* ${discB.value}% = Rp.0
-*Nilai Nota Netto*: Rp.${netto}
-*Development Fee :* Rp.${devFee.value}
+*Biaya Packing/ Angkut/ Bifast :* ${rupiah(biaya.value)}
+*Retur (Barang Tidak Sesuai):* ${rupiah(retur1.value)}
+*Retur (Barang Kurang Lengkap):* ${rupiah(retur2.value)}
+*Discount A:* ${rupiah(discA.value)}
+*Discount B:* ${discB.value}% = ${rupiah(0)}
+*Nilai Nota Netto*: ${rupiah(netto)}
+*Development Fee :* ${rupiah(devFee.value)}
 
 
-*Nilai Nota Terinput Sistem :* Rp.${netto}
+*Nilai Nota Terinput Sistem :* ${rupiah(netto)}
 
 
 *Jatuh Tempo:* *${jt}*
 
 
 *Keterangan:* ${ket.value}`;
-}
 
 /* ===== PREVIEW REALTIME ===== */
 document.querySelectorAll("input, textarea, select")
