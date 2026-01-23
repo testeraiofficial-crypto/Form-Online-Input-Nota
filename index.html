@@ -1,288 +1,63 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<title>Financial Freedom.id - Form Online Input Nota</title>
-
-<style>
-body{
-  margin:0;
-  font-family:Segoe UI,Arial,sans-serif;
-  background:linear-gradient(180deg,#0b1f26,#12343d);
-  color:#e9f1f4;
-}
-.wrapper{
-  max-width:1100px;
-  margin:40px auto;
-  background:#1e3a43;
-  padding:30px;
-  border-radius:16px;
-  box-shadow:0 20px 40px rgba(0,0,0,.4);
-}
-h1{text-align:center}
-h1 span{display:block;font-size:13px;opacity:.7}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:12px;
-}
-.col-2{grid-column:span 2}
-.col-4{grid-column:span 4}
-
-label{font-size:12px;opacity:.85}
-input,select,textarea{
-  width:100%;
-  padding:10px;
-  border-radius:8px;
-  border:none;
-}
-textarea{min-height:90px}
-
-button{
-  width:100%;
-  margin-top:20px;
-  padding:14px;
-  font-size:16px;
-  border:none;
-  border-radius:10px;
-  background:linear-gradient(90deg,#00c6ff,#0072ff);
-  color:#fff;
-  cursor:pointer;
-}
-
-.output{
-  margin-top:15px;
-  background:#07181f;
-  padding:15px;
-  border-radius:10px;
-  white-space:pre-wrap;
-  font-size:13px;
-}
-
-.copy-btn{
-  background:#25D366;
-  margin-top:10px;
-}
-
-footer{text-align:center;margin-top:25px;font-size:12px;opacity:.7}
-</style>
+  <meta charset="UTF-8">
+  <title>Form Input Nota - Minimarket Pilar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-<div class="wrapper">
 
-<h1>Form Online Input Nota
-<span>Financial Freedom.id</span></h1>
+<h2>FORM INPUT NOTA BARANG MASUK</h2>
 
-<div class="grid">
+<form id="notaForm">
 
-<div>
-<label>Tanggal Laporan</label>
-<input type="date" id="tglLaporan">
-</div>
+  <label>Tanggal Input</label>
+  <input type="date" id="tanggalInput" required>
 
-<div>
-<label>No Nota</label>
-<input id="noNota" value="-">
-</div>
+  <label>Supplier</label>
+  <select id="supplier" required></select>
 
-<div class="col-2">
-<label>Supplier</label>
-<select id="supplier">
-<option>UD DWI PUTRA</option>
-<option>TB SUMBER MAKMUR</option>
-<option>TB MEKAR</option>
-<option>TB MARGA UTAMA</option>
-<option>TB RUKUN MAKMUR</option>
-<option>LAINNYA</option>
-</select>
-</div>
+  <label>No Nota</label>
+  <input type="text" id="noNota" required>
 
-<div class="col-4">
-<label>Jumlah + Nama Barang (pisahkan koma / baris)</label>
-<textarea id="barang"></textarea>
-</div>
+  <label>Tanggal Nota</label>
+  <input type="date" id="tglNota" required>
 
-<div>
-<label>Tanggal Nota</label>
-<input type="date" id="tglNota">
-</div>
+  <label>Tanggal Barang Datang</label>
+  <input type="date" id="tglDatang" required>
 
-<div>
-<label>Barang Datang</label>
-<input type="date" id="tglDatang">
-</div>
+  <label>Sistem Pembayaran</label>
+  <select id="pembayaran" required></select>
 
-<div>
-<label>Sistem Pembayaran</label>
-<select id="sistem" onchange="toggleTempo()">
-<option>CASH</option>
-<option>TEMPO</option>
-</select>
-</div>
+  <label>Tanggal Jatuh Tempo</label>
+  <input type="date" id="tglTempo" required>
 
-<div>
-<label>Masa Tempo (hari)</label>
-<select id="masaTempo" disabled>
-<option value="1">1</option>
-<option value="14">14</option>
-<option value="30">30</option>
-<option value="45">45</option>
-</select>
-</div>
+  <label>Detail Barang Masuk</label>
+  <textarea id="barang" rows="4" required></textarea>
 
-<div>
-<label>Checker</label>
-<input id="checker">
-</div>
+  <label>Checker</label>
+  <select id="checker" required></select>
 
-<div>
-<label>Verifikator</label>
-<input id="verifikator">
-</div>
+  <label>Verifikator</label>
+  <input type="text" id="verifikator" required>
 
-<div class="col-2">
-<label>Petugas Display</label>
-<textarea id="display"></textarea>
-</div>
+  <label>Petugas Display</label>
+  <input type="text" id="display" required>
 
-<div class="col-2">
-<label>PIC Packing</label>
-<input id="packing">
-</div>
+  <button type="button" id="generateBtn">GENERATE LAPORAN</button>
+</form>
 
-<div>
-<label>Nilai Nota</label>
-<input type="number" id="nilaiNota" value="0">
-</div>
+<hr>
 
-<div>
-<label>PPN</label>
-<input type="number" id="ppn" value="0">
-</div>
+<h3>Output WhatsApp</h3>
+<textarea id="outputWa" rows="18" readonly></textarea>
+<button onclick="copyText('outputWa')">📋 Copy WhatsApp</button>
 
-<div>
-<label>Biaya Packing / Angkut / Bifast</label>
-<input type="number" id="biaya" value="0">
-</div>
+<h3>Output Sistem</h3>
+<textarea id="outputSistem" rows="10" readonly></textarea>
+<button onclick="copyText('outputSistem')">📋 Copy Sistem</button>
 
-<div>
-<label>Retur Tidak Sesuai</label>
-<input type="number" id="retur1" value="0">
-</div>
-
-<div>
-<label>Retur Kurang Lengkap</label>
-<input type="number" id="retur2" value="0">
-</div>
-
-<div>
-<label>Discount A</label>
-<input type="number" id="discA" value="0">
-</div>
-
-<div>
-<label>Discount B (%)</label>
-<input type="number" id="discB" value="0">
-</div>
-
-<div>
-<label>Development Fee</label>
-<input type="number" id="devFee" value="0">
-</div>
-
-<div class="col-4">
-<label>Keterangan</label>
-<textarea id="ket"></textarea>
-</div>
-
-</div>
-
-<h3>📱 Preview Laporan WhatsApp</h3>
-<div class="output" id="hasil"></div>
-
-<button class="copy-btn" onclick="copyWA()">📋 Copy ke Clipboard</button>
-
-<footer>Financial Freedom.id</footer>
-</div>
-
-<script>
-/* ===== HEADER TOKO DI-LOCK ===== */
-const HEADER_TOKO = `*MINIMARKET BANGUNAN PILAR*
-*Jl. Sunan Kudus, Gatak, Rukeman, Tamantirto, Bantul, DIY*
-*═══════════════*`;
-
-function toggleTempo(){
-  masaTempo.disabled = sistem.value==="CASH";
-}
-
-function tglIndo(d){
-  if(!d) return "-";
-  const b=["JANUARI","FEBRUARI","MARET","APRIL","MEI","JUNI","JULI","AGUSTUS","SEPTEMBER","OKTOBER","NOVEMBER","DESEMBER"];
-  const x=new Date(d);
-  return x.getDate()+" "+b[x.getMonth()]+" "+x.getFullYear();
-}
-
-function barangFormat(){
-  return barang.value.split(/\n|,/).map(x=>x.trim()).filter(x=>x).join(", ");
-}
-
-function generateWA(){
-  const jt = sistem.value==="CASH"
-    ? "LUNAS"
-    : tglIndo(new Date(new Date(tglNota.value).setDate(new Date(tglNota.value).getDate()+parseInt(masaTempo.value))));
-
-  const netto =
-    Number(nilaiNota.value)
-    - Number(retur1.value)
-    - Number(retur2.value)
-    - Number(discA.value)
-    - (Number(nilaiNota.value)*Number(discB.value)/100)
-    + Number(ppn.value)
-    + Number(biaya.value)
-    + Number(devFee.value);
-
-  hasil.innerText =
-`${HEADER_TOKO}
-
-*LAPORAN INPUT BARANG MASUK*
-
-*Tanggal :* ${tglIndo(tglLaporan.value)}
-
-
-(${supplier.value}) (NO.NOTA : ${noNota.value}) ${barangFormat()} (TGL NOTA : ${tglIndo(tglNota.value)}) (BARANG DATANG : ${tglIndo(tglDatang.value)}) ( SISTEM PEMBAYARAN : ${sistem.value}) (TGL JATUH TEMPO : ${jt}) CHECKER : ${checker.value} VERIFIKATOR : ${verifikator.value} PETUGAS DISPLAY : ${display.value})(PIC PACKING : ${packing.value})
-
-
-*Nilai Nota :* ${rupiah(nilaiNota.value)}
-*PPN :*
-*Biaya Packing/ Angkut/ Bifast :* ${rupiah(biaya.value)}
-*Retur (Barang Tidak Sesuai):* ${rupiah(retur1.value)}
-*Retur (Barang Kurang Lengkap):* ${rupiah(retur2.value)}
-*Discount A:* ${rupiah(discA.value)}
-*Discount B:* ${discB.value}% = ${rupiah(0)}
-*Nilai Nota Netto*: ${rupiah(netto)}
-*Development Fee :* ${rupiah(devFee.value)}
-
-
-*Nilai Nota Terinput Sistem :* ${rupiah(netto)}
-
-
-*Jatuh Tempo:* *${jt}*
-
-
-*Keterangan:* ${ket.value}`;
-
-/* ===== PREVIEW REALTIME ===== */
-document.querySelectorAll("input, textarea, select")
-.forEach(el => el.addEventListener("input", generateWA));
-
-/* ===== COPY CLIPBOARD ===== */
-function copyWA(){
-  navigator.clipboard.writeText(hasil.innerText)
-    .then(()=>alert("Laporan WhatsApp berhasil dicopy!"));
-}
-</script>
-
+<script type="module" src="script.js"></script>
 </body>
 </html>
