@@ -33,6 +33,10 @@ function formatDate(dateStr) {
   return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
 }
 
+function formatRupiah(angka) {
+  return "Rp." + Number(angka).toLocaleString("id-ID");
+}
+
 generateBtn.addEventListener("click", () => {
   const supplier = supplierEl.value;
   const noNota = document.getElementById("noNota").value;
