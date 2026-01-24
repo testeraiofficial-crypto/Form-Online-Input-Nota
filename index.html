@@ -7,79 +7,142 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="app-container">
 
-<h2>FORM INPUT NOTA BARANG MASUK</h2>
+    <header class="app-header">
+      <h1>🧾 Form Input Nota Online</h1>
+      <p>MINIMARKET BANGUNAN PILAR</p>
+    </header>
 
-<form id="notaForm">
+    <section class="card">
+      <h2>📋 Data Nota</h2>
 
-  <label>Tanggal Input</label>
-  <input type="date" id="tanggalInput" required>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Tanggal Input</label>
+          <input type="date" id="tanggalInput">
+        </div>
 
-  <label>Supplier</label>
-  <select id="supplier" required></select>
+        <div class="form-group">
+          <label>Supplier</label>
+          <select id="supplier"></select>
+        </div>
 
-  <label>No Nota</label>
-  <input type="text" id="noNota" required>
+        <div class="form-group">
+          <label>No Nota</label>
+          <input type="text" id="noNota">
+        </div>
 
-  <label>Tanggal Nota</label>
-  <input type="date" id="tglNota" required>
+        <div class="form-group">
+          <label>Sistem Pembayaran</label>
+          <select id="pembayaran"></select>
+        </div>
 
-  <label>Tanggal Barang Datang</label>
-  <input type="date" id="tglDatang" required>
+        <div class="form-group">
+          <label>Tanggal Nota</label>
+          <input type="date" id="tglNota">
+        </div>
 
-  <label>Sistem Pembayaran</label>
-  <select id="pembayaran" required></select>
+        <div class="form-group">
+          <label>Tanggal Barang Datang</label>
+          <input type="date" id="tglDatang">
+        </div>
 
-  <label>Tanggal Jatuh Tempo</label>
-  <input type="date" id="tglTempo" required>
+        <div class="form-group">
+          <label>Tanggal Jatuh Tempo</label>
+          <input type="date" id="tglTempo">
+        </div>
 
-  <label>Detail Barang Masuk</label>
-  <textarea id="barang" rows="4" required></textarea>
+        <div class="form-group full">
+          <label>Detail Barang Masuk</label>
+          <textarea id="barang" rows="3"></textarea>
+        </div>
+      </div>
+    </section>
 
-  <label>Nilai Nota</label>
-<input type="number" id="nilaiNota" value="0" min="0">
+    <section class="card">
+      <h2>💰 Nilai Keuangan</h2>
 
-<label>PPN</label>
-<input type="number" id="ppn" value="0" min="0">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Nilai Nota</label>
+          <input type="number" id="nilaiNota" value="0">
+        </div>
 
-<label>Biaya Packing / Angkut / Bifast</label>
-<input type="number" id="biayaLain" value="0" min="0">
+        <div class="form-group">
+          <label>PPN</label>
+          <input type="number" id="ppn" value="0">
+        </div>
 
-<label>Retur (Barang Tidak Sesuai)</label>
-<input type="number" id="returTidakSesuai" value="0" min="0">
+        <div class="form-group">
+          <label>Biaya Packing / Angkut / Bifast</label>
+          <input type="number" id="biayaLain" value="0">
+        </div>
 
-<label>Discount A</label>
-<input type="number" id="discountA" value="0" min="0">
+        <div class="form-group">
+          <label>Retur (Barang Tidak Sesuai)</label>
+          <input type="number" id="returTidakSesuai" value="0">
+        </div>
 
-<label>Discount B</label>
-<input type="number" id="discountB" value="0" min="0">
+        <div class="form-group">
+          <label>Discount A</label>
+          <input type="number" id="discountA" value="0">
+        </div>
 
-<label>Development Fee</label>
-<input type="number" id="developmentFee" value="0" min="0">
+        <div class="form-group">
+          <label>Discount B</label>
+          <input type="number" id="discountB" value="0">
+        </div>
 
+        <div class="form-group">
+          <label>Development Fee</label>
+          <input type="number" id="developmentFee" value="0">
+        </div>
+      </div>
+    </section>
 
-  <label>Checker</label>
-  <select id="checker" required></select>
+    <section class="card">
+      <h2>👥 Petugas</h2>
 
-  <label>Verifikator</label>
-  <input type="text" id="verifikator" required>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Checker</label>
+          <select id="checker"></select>
+        </div>
 
-  <label>Petugas Display</label>
-  <input type="text" id="display" required>
+        <div class="form-group">
+          <label>Verifikator</label>
+          <input type="text" id="verifikator">
+        </div>
 
-  <button type="button" id="generateBtn">GENERATE LAPORAN</button>
-</form>
+        <div class="form-group">
+          <label>Petugas Display</label>
+          <input type="text" id="display">
+        </div>
+      </div>
 
-<hr>
+      <button id="generateBtn" class="primary-btn">
+        ✅ Buat Laporan
+      </button>
+    </section>
 
-<h3>Output WhatsApp</h3>
-<textarea id="outputWa" rows="18" readonly></textarea>
-<button onclick="copyText('outputWa')">📋 Copy WhatsApp</button>
+    <section class="card">
+      <h2>📲 Laporan WhatsApp</h2>
+      <textarea id="outputWa" rows="12" readonly></textarea>
+    </section>
 
-<h3>Output Sistem</h3>
-<textarea id="outputSistem" rows="10" readonly></textarea>
-<button onclick="copyText('outputSistem')">📋 Copy Sistem</button>
+    <section class="card">
+      <h2>🗂️ Laporan Sistem</h2>
+      <textarea id="outputSistem" rows="8" readonly></textarea>
+    </section>
 
-<script type="module" src="script.js"></script>
+    <footer class="app-footer">
+      Financial Freedom ID • Form Input Nota Online • Creator Indra
+    </footer>
+
+  </div>
+
+  <script type="module" src="script.js"></script>
 </body>
+
 </html>
