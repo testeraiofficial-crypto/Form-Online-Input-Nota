@@ -66,6 +66,22 @@ function autoResizeTextarea(el) {
       nettoEl.value = formatRupiah(netto);
     }
 
+    function hitungNilaiTerinputSistem() {
+  const nilaiNotaNetto = hitungNilaiNotaNetto();
+  const developmentFee =
+    Number(document.getElementById("developmentFee")?.value) || 0;
+
+  const total = nilaiNotaNetto + developmentFee;
+
+  const el = document.getElementById("nilaiTerinputSistem");
+  if (el) {
+    el.value = formatRupiah(total);
+  }
+
+  return total;
+}
+
+
     return netto;
   }
 
@@ -73,17 +89,17 @@ function autoResizeTextarea(el) {
   // EVENT REALTIME (SATU KALI, AMAN)
   // =========================
   [
-    "nilaiNota",
-    "ppn",
-    "biayaLain",
-    "returTidakSesuai",
-    "discountA",
-    "discountB"
-  ].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.addEventListener("input", hitungNilaiNotaNetto);
-    }
+  "nilaiNota",
+  "ppn",
+  "biayaLain",
+  "returTidakSesuai",
+  "discountA",
+  "discountB",
+  "developmentFee"
+].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) {
+    el.addEventListener("input", () => {
   });
 
   // =========================
@@ -114,8 +130,9 @@ function autoResizeTextarea(el) {
     const developmentFee = Number(document.getElementById("developmentFee").value) || 0;
 
     // 🔒 PAKAI HASIL HITUNG SISTEM (TIDAK HITUNG ULANG)
-    const nilaiNotaNetto = hitungNilaiNotaNetto();
-    const nilaiTerinputSistem = nilaiNotaNetto + developmentFee;
+   const nilaiNotaNetto = hitungNilaiNotaNetto();
+const nilaiTerinputSistem = hitungNilaiTerinputSistem();
+
 
     const sistem = `
 (${supplier}) (NO.NOTA : ${noNota})
@@ -153,6 +170,15 @@ ${sistem}
 
 *Jatuh Tempo:* *${tglTempo}*
 `.trim();
+
+    const nilaiDiWA = formatRupiah(nilaiTerinputSistem);
+const nilaiField = document.getElementById("nilaiTerinputSistem").value;
+
+if (nilaiDiWA !== nilaiField) {
+  alert("⚠️ Nilai tidak sesuai dengan laporan WhatsApp");
+  return;
+}
+
 
     outputWa.value = wa;
 outputSistem.value = sistem;
