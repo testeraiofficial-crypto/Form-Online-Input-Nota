@@ -52,6 +52,17 @@ function hitungNilaiNotaNetto() {
   return netto;
 }
 
+[
+  "nilaiNota",
+  "ppn",
+  "returTidakSesuai",
+  "discountA",
+  "discountB"
+].forEach(id => {
+  document.getElementById(id).addEventListener("input", hitungNilaiNotaNetto);
+});
+
+
 
 generateBtn.addEventListener("click", () => {
   const supplier = supplierEl.value;
