@@ -37,6 +37,22 @@ function formatRupiah(angka) {
   return "Rp." + Number(angka).toLocaleString("id-ID");
 }
 
+function hitungNilaiNotaNetto() {
+  const nilaiNota = Number(document.getElementById("nilaiNota").value) || 0;
+  const ppn = Number(document.getElementById("ppn").value) || 0;
+  const retur = Number(document.getElementById("returTidakSesuai").value) || 0;
+  const diskonA = Number(document.getElementById("discountA").value) || 0;
+  const diskonB = Number(document.getElementById("discountB").value) || 0;
+
+  const netto =
+    (nilaiNota + ppn) -
+    (retur + diskonA + diskonB);
+
+  document.getElementById("nilaiNotaNetto").value = formatRupiah(netto);
+  return netto;
+}
+
+
 generateBtn.addEventListener("click", () => {
   const supplier = supplierEl.value;
   const noNota = document.getElementById("noNota").value;
