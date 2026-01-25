@@ -39,6 +39,11 @@ document.addEventListener("DOMContentLoaded", () => {
   function formatRupiah(angka) {
     return "Rp." + Number(angka).toLocaleString("id-ID");
   }
+  
+function autoResizeTextarea(el) {
+  el.style.height = "auto";
+  el.style.height = el.scrollHeight + "px";
+}
 
   // =========================
   // HITUNG NILAI NOTA NETTO
