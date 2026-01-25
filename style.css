@@ -61,14 +61,13 @@ body {
 .form-group input,
 .form-group select,
 .form-group textarea {
-  width: 100%;
-  padding: 10px 12px;
+  background: #0f1f26;
+  color: #eaf6ff;
   border-radius: 10px;
-  border: none;
-  background: rgba(0,0,0,0.35);
-  color: #fff;
-  font-size: 14px;
+  padding: 14px;
+  font-family: monospace;
 }
+
 
 .form-group textarea {
   resize: vertical;
