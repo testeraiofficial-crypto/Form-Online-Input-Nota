@@ -155,7 +155,11 @@ ${sistem}
 `.trim();
 
     outputWa.value = wa;
-    outputSistem.value = sistem;
+outputSistem.value = sistem;
+
+autoResizeTextarea(outputWa);
+autoResizeTextarea(outputSistem);
+
   });
 
   window.copyText = function(id) {
