@@ -2,107 +2,117 @@ import { supplierList } from "./data/supplier.js";
 import { checkerList } from "./data/checker.js";
 import { pembayaranList } from "./data/pembayaran.js";
 
-const supplierEl = document.getElementById("supplier");
-const checkerEl = document.getElementById("checker");
-const pembayaranEl = document.getElementById("pembayaran");
+document.addEventListener("DOMContentLoaded", () => {
 
-const generateBtn = document.getElementById("generateBtn");
-const outputWa = document.getElementById("outputWa");
-const outputSistem = document.getElementById("outputSistem");
+  const supplierEl = document.getElementById("supplier");
+  const checkerEl = document.getElementById("checker");
+  const pembayaranEl = document.getElementById("pembayaran");
 
-function populateSelect(el, data) {
-  el.innerHTML = `<option value="">-- PILIH --</option>`;
-  data.forEach(item => {
-    const opt = document.createElement("option");
-    opt.value = item;
-    opt.textContent = item;
-    el.appendChild(opt);
+  const generateBtn = document.getElementById("generateBtn");
+  const outputWa = document.getElementById("outputWa");
+  const outputSistem = document.getElementById("outputSistem");
+
+  function populateSelect(el, data) {
+    el.innerHTML = `<option value="">-- PILIH --</option>`;
+    data.forEach(item => {
+      const opt = document.createElement("option");
+      opt.value = item;
+      opt.textContent = item;
+      el.appendChild(opt);
+    });
+  }
+
+  populateSelect(supplierEl, supplierList);
+  populateSelect(checkerEl, checkerList);
+  populateSelect(pembayaranEl, pembayaranList);
+
+  function formatDate(dateStr) {
+    if (!dateStr) return "-";
+    const months = [
+      "JANUARI","FEBRUARI","MARET","APRIL","MEI","JUNI",
+      "JULI","AGUSTUS","SEPTEMBER","OKTOBER","NOVEMBER","DESEMBER"
+    ];
+    const d = new Date(dateStr);
+    return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+  }
+
+  function formatRupiah(angka) {
+    return "Rp." + Number(angka).toLocaleString("id-ID");
+  }
+
+  // =========================
+  // HITUNG NILAI NOTA NETTO
+  // =========================
+  function hitungNilaiNotaNetto() {
+    const nilaiNota = Number(document.getElementById("nilaiNota")?.value) || 0;
+    const ppn = Number(document.getElementById("ppn")?.value) || 0;
+    const biayaLain = Number(document.getElementById("biayaLain")?.value) || 0;
+
+    const retur = Number(document.getElementById("returTidakSesuai")?.value) || 0;
+    const diskonA = Number(document.getElementById("discountA")?.value) || 0;
+    const diskonB = Number(document.getElementById("discountB")?.value) || 0;
+
+    const netto =
+      (nilaiNota + ppn + biayaLain) -
+      (retur + diskonA + diskonB);
+
+    const nettoEl = document.getElementById("nilaiNotaNetto");
+    if (nettoEl) {
+      nettoEl.value = formatRupiah(netto);
+    }
+
+    return netto;
+  }
+
+  // =========================
+  // EVENT REALTIME (SATU KALI, AMAN)
+  // =========================
+  [
+    "nilaiNota",
+    "ppn",
+    "biayaLain",
+    "returTidakSesuai",
+    "discountA",
+    "discountB"
+  ].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.addEventListener("input", hitungNilaiNotaNetto);
+    }
   });
-}
 
-populateSelect(supplierEl, supplierList);
-populateSelect(checkerEl, checkerList);
-populateSelect(pembayaranEl, pembayaranList);
+  // =========================
+  // GENERATE LAPORAN
+  // =========================
+  generateBtn.addEventListener("click", () => {
 
-function formatDate(dateStr) {
-  const months = [
-    "JANUARI","FEBRUARI","MARET","APRIL","MEI","JUNI",
-    "JULI","AGUSTUS","SEPTEMBER","OKTOBER","NOVEMBER","DESEMBER"
-  ];
-  const d = new Date(dateStr);
-  return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
-}
+    const supplier = supplierEl.value;
+    const noNota = document.getElementById("noNota").value;
+    const barang = document.getElementById("barang").value;
+    const pembayaran = pembayaranEl.value;
 
-function formatRupiah(angka) {
-  return "Rp." + Number(angka).toLocaleString("id-ID");
-}
+    const tglNota = formatDate(document.getElementById("tglNota").value);
+    const tglDatang = formatDate(document.getElementById("tglDatang").value);
+    const tglTempo = formatDate(document.getElementById("tglTempo").value);
+    const tanggalInput = formatDate(document.getElementById("tanggalInput").value);
 
-function hitungNilaiNotaNetto() {
-  const nilaiNota = Number(document.getElementById("nilaiNota").value) || 0;
-  const ppn = Number(document.getElementById("ppn").value) || 0;
-  const biayaLain = Number(document.getElementById("biayaLain").value) || 0;
+    const checker = checkerEl.value;
+    const verifikator = document.getElementById("verifikator").value;
+    const display = document.getElementById("display").value;
 
-  const retur = Number(document.getElementById("returTidakSesuai").value) || 0;
-  const diskonA = Number(document.getElementById("discountA").value) || 0;
-  const diskonB = Number(document.getElementById("discountB").value) || 0;
+    const nilaiNota = Number(document.getElementById("nilaiNota").value) || 0;
+    const ppn = Number(document.getElementById("ppn").value) || 0;
+    const biayaLain = Number(document.getElementById("biayaLain").value) || 0;
+    const returTidakSesuai = Number(document.getElementById("returTidakSesuai").value) || 0;
+    const discountA = Number(document.getElementById("discountA").value) || 0;
+    const discountB = Number(document.getElementById("discountB").value) || 0;
+    const developmentFee = Number(document.getElementById("developmentFee").value) || 0;
 
-  const netto =
-    (nilaiNota + ppn + biayaLain) -
-    (retur + diskonA + diskonB);
+    // 🔒 PAKAI HASIL HITUNG SISTEM (TIDAK HITUNG ULANG)
+    const nilaiNotaNetto = hitungNilaiNotaNetto();
+    const nilaiTerinputSistem = nilaiNotaNetto + developmentFee;
 
-  document.getElementById("nilaiNotaNetto").value = formatRupiah(netto);
-  return netto;
-}
-
-
-[
-  "nilaiNota",
-  "ppn",
-  "biayaLain",
-  "returTidakSesuai",
-  "discountA",
-  "discountB"
-].forEach(id => {
-  document.getElementById(id).addEventListener("input", hitungNilaiNotaNetto);
-});
-
-
-
-
-generateBtn.addEventListener("click", () => {
-  const supplier = supplierEl.value;
-  const noNota = document.getElementById("noNota").value;
-  const barang = document.getElementById("barang").value;
-  const pembayaran = pembayaranEl.value;
-
-  const tglNota = formatDate(document.getElementById("tglNota").value);
-  const tglDatang = formatDate(document.getElementById("tglDatang").value);
-  const tglTempo = formatDate(document.getElementById("tglTempo").value);
-  const tanggalInput = formatDate(document.getElementById("tanggalInput").value);
-
-  const checker = checkerEl.value;
-  const verifikator = document.getElementById("verifikator").value;
-  const display = document.getElementById("display").value;
-
-  // === NILAI KEUANGAN ===
-  const nilaiNota = Number(document.getElementById("nilaiNota").value) || 0;
-  const ppn = Number(document.getElementById("ppn").value) || 0;
-  const biayaLain = Number(document.getElementById("biayaLain").value) || 0;
-  const returTidakSesuai = Number(document.getElementById("returTidakSesuai").value) || 0;
-  const discountA = Number(document.getElementById("discountA").value) || 0;
-  const discountB = Number(document.getElementById("discountB").value) || 0;
-  const developmentFee = Number(document.getElementById("developmentFee").value) || 0;
-
-  // === RUMUS SISTEM ===
-  const nilaiNotaNetto =
-    (nilaiNota + ppn) -
-    (returTidakSesuai + discountA + discountB);
-
-  const nilaiTerinputSistem =
-    nilaiNotaNetto + developmentFee;
-
-  // === LAPORAN SISTEM ===
-  const sistem = `
+    const sistem = `
 (${supplier}) (NO.NOTA : ${noNota})
 ${barang}
 (TGL NOTA : ${tglNota})
@@ -114,8 +124,7 @@ VERIFIKATOR : ${verifikator}
 PETUGAS DISPLAY : ${display}
 `.trim();
 
-  // === LAPORAN WHATSAPP ===
-  const wa = `
+    const wa = `
 *MINIMARKET BANGUNAN PILAR*
 *Jl. Sunan Kudus, Gatak, Rukeman, Tamantirto, Bantul, DIY*
 *═══════════════*
@@ -140,15 +149,15 @@ ${sistem}
 *Jatuh Tempo:* *${tglTempo}*
 `.trim();
 
-  outputWa.value = wa;
-  outputSistem.value = sistem;
+    outputWa.value = wa;
+    outputSistem.value = sistem;
+  });
+
+  window.copyText = function(id) {
+    const el = document.getElementById(id);
+    el.select();
+    document.execCommand("copy");
+    alert("Teks berhasil disalin");
+  };
+
 });
-
-
-
-window.copyText = function(id) {
-  const el = document.getElementById(id);
-  el.select();
-  document.execCommand("copy");
-  alert("Teks berhasil disalin");
-};
