@@ -115,12 +115,47 @@ document.addEventListener("DOMContentLoaded", () => {
     const nilaiTerinputSistem = hitungNilaiTerinputSistem();
 
     const wa = `
+const wa = `
 *MINIMARKET BANGUNAN PILAR*
-*═══════════════*
+*JL Sunan Kudus, Gatak, Rukeman, Tamantirto, Bantul, DIY*
+═══════════════════════════════════════════════════
+*LAPORAN INPUT BARANG MASUK*
+*Tanggal :* ${tanggalInput}
 
+
+(${supplier}) (NO.NOTA : ${noNota})
+${barang}
+(TGL NOTA : ${tglNota})
+(BARANG DATANG : ${tglDatang})
+(SISTEM PEMBAYARAN : ${pembayaran})
+(TGL JATUH TEMPO : ${pembayaran === "CASH" ? "LUNAS" : tglTempo})
+CHECKER : ${checker}
+VERIFIKATOR : ${verifikator}
+PETUGAS DISPLAY : ${display}
+
+
+*Nilai Nota :* ${formatRupiah(nilaiNota)}
+*PPN :* ${formatRupiah(ppn)}
+*Biaya Packing/ Angkut/ Bifast :* ${formatRupiah(biayaLain)}
+*Retur (Barang Tidak Sesuai):* ${formatRupiah(returTidakSesuai)}
+*Retur (Barang Kurang Lengkap):* Rp.0
+*Discount A:* ${formatRupiah(discountA)}
+*Discount B:* 26% = ${formatRupiah(discountB)}
 *Nilai Nota Netto:* ${formatRupiah(nilaiNotaNetto)}
-*Nilai Nota Terinput Sistem:* ${formatRupiah(nilaiTerinputSistem)}
+
+
+*Development Fee :* ${formatRupiah(developmentFee)}
+
+
+*Nilai Nota Terinput Sistem :* ${formatRupiah(nilaiTerinputSistem)}
+
+
+*Jatuh Tempo:* *${pembayaran === "CASH" ? "LUNAS" : tglTempo}*
+
+
+*Keterangan:*
 `.trim();
+
 
     if (
       formatRupiah(nilaiTerinputSistem) !==
