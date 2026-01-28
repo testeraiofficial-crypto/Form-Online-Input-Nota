@@ -99,3 +99,14 @@ label {
   margin-bottom: 4px;
   display: block;
 }
+
+button[onclick^="copyLaporan"] {
+  margin-top: 8px;
+  background: #455a64;
+  font-size: 14px;
+}
+
+button[onclick^="copyLaporan"]:hover {
+  background: #37474f;
+}
+
