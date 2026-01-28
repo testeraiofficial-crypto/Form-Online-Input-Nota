@@ -62,4 +62,13 @@ ${laporanSistem.value}
 *Nilai Nota Terinput Sistem :* ${notaSistem.value}
 
 *Jatuh Tempo:* ${jatuhTempo.value}`;
+  
+}
+
+function copyLaporan(id) {
+  const textarea = document.getElementById(id);
+  textarea.select();
+  textarea.setSelectionRange(0, 99999); // untuk mobile
+  document.execCommand("copy");
+  alert("LAPORAN BERHASIL DISALIN");
 }
