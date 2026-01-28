@@ -66,4 +66,36 @@ textarea[readonly] {
 button {
   width: 100%;
   padding: 14px;
-  b
+  border-radius: 10px;
+  border: none;
+  background: #3da9fc;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: #2a8bdc;
+  transform: translateY(-1px);
+}
+
+/* LAPORAN AREA */
+#laporanSistem,
+#laporanWA {
+  background: #0c1f26;
+  color: #cfd8dc;
+  font-family: Consolas, monospace;
+  font-size: 13px;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+/* LABEL OPSIONAL (JIKA MAU DIPAKAI) */
+label {
+  font-size: 13px;
+  color: #cfd8dc;
+  margin-bottom: 4px;
+  display: block;
+}
