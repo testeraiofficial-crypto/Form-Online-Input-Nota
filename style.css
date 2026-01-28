@@ -1,32 +1,69 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  background: #f5f5f5;
-  padding: 20px;
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #123843, #0f2a33);
+  color: #ffffff;
+  padding: 30px;
 }
 
+/* JUDUL */
+h1 {
+  text-align: center;
+  margin-bottom: 25px;
+  letter-spacing: 1px;
+}
+
+/* CARD / FORM CONTAINER */
 section {
-  background: #fff;
-  padding: 15px;
-  margin-bottom: 20px;
-  border-radius: 8px;
+  background: #2c434b;
+  padding: 20px;
+  margin-bottom: 22px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
-input, select, textarea {
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 8px;
+/* SUB JUDUL */
+h2, h3 {
+  margin-top: 0;
+  color: #e3f2f7;
 }
 
+/* INPUT */
+input,
+select,
 textarea {
-  height: 120px;
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: none;
+  background: #f2f6f7;
+  color: #000;
+  font-size: 14px;
 }
 
-button {
-  padding: 12px;
-  width: 100%;
-  font-size: 16px;
-  background: #2e7d32;
-  color: white;
-  border: none;
-  border-radius: 6px;
+/* TEXTAREA */
+textarea {
+  resize: vertical;
+  min-height: 100px;
 }
+
+/* READONLY */
+input[readonly],
+textarea[readonly] {
+  background: #e0e7ea;
+  color: #000;
+  font-weight: bold;
+}
+
+/* BUTTON */
+button {
+  width: 100%;
+  padding: 14px;
+  b
