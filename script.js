@@ -33,17 +33,11 @@ function hitungKeuangan(){
 function generateLaporan(){
   let sup = supplier.value==="LAINNYA" ? supplierLain.value : supplier.value;
 
-  laporanSistem.value = 
-`${sup}
-NOMOR NOTA : ${nomorNota.value}
-${detailBarang.value}
-TANGGAL NOTA : ${formatTanggal(tanggalNota.value)}
-BARANG DATANG : ${formatTanggal(tanggalDatang.value)}
-SISTEM PEMBAYARAN : ${pembayaran.options[pembayaran.selectedIndex].text}
-JATUH TEMPO : ${jatuhTempo.value}
-CHECKER : ${checker.value}
-VERIFIKATOR : ${verifikator.value}
-PETUGAS DISPLAY : ${display.value}`.toUpperCase();
+
+  laporanSistem.value =
+`(${sup}) (NO.NOTA : ${nomorNota.value}) ${detailBarang.value.toUpperCase()} (TGL NOTA : ${formatTanggal(tanggalNota.value)}) (BARANG DATANG : ${formatTanggal(tanggalDatang.value)}) ( SISTEM PEMBAYARAN : ${pembayaran.options[pembayaran.selectedIndex].text}) (TGL JATUH TEMPO : ${jatuhTempo.value}) CHECKER : ${checker.value}  VERIFIKATOR : ${verifikator.value} PETUGAS DISPLAY : ${display.value})`
+.toUpperCase();
+
 
   laporanWA.value =
 `*MINIMARKET BANGUNAN PILAR*
