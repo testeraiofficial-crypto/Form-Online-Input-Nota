@@ -141,9 +141,15 @@
 <section>
 <h2>LAPORAN SISTEM</h2>
 <textarea id="laporanSistem" readonly></textarea>
+<button type="button" onclick="copyLaporan('laporanSistem')">
+  📋 COPY LAPORAN SISTEM
+</button>
 
 <h2>LAPORAN WHATSAPP</h2>
 <textarea id="laporanWA" readonly></textarea>
+<button type="button" onclick="copyLaporan('laporanWA')">
+  📋 COPY LAPORAN WHATSAPP
+</button>
 </section>
 
 <button onclick="generateLaporan()">GENERATE LAPORAN</button>
