@@ -1,112 +1,255 @@
 * {
   box-sizing: border-box;
-  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
 body {
   margin: 0;
+  background-color: #f0f4f8; /* Background dashboard modern */
+  color: #334155;
+}
+
+/* LAYOUT UTAMA */
+.dashboard-container {
+  display: flex;
   min-height: 100vh;
-  background: linear-gradient(180deg, #123843, #0f2a33);
+}
+
+/* SIDEBAR KIRI */
+.sidebar {
+  width: 250px;
+  background: linear-gradient(180deg, #0284c7 0%, #0d9488 100%);
   color: #ffffff;
-  padding: 30px;
+  padding: 25px 20px;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 100vh;
 }
 
-/* JUDUL */
-h1 {
-  text-align: center;
-  margin-bottom: 25px;
-  letter-spacing: 1px;
+.logo h2 {
+  font-size: 20px;
+  margin: 0 0 30px 0;
+  color: #fff;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  padding-bottom: 15px;
 }
 
-/* CARD / FORM CONTAINER */
-section {
-  background: #2c434b;
-  padding: 20px;
-  margin-bottom: 22px;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
-  border: 1px solid rgba(255,255,255,0.08);
+.nav-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1;
 }
 
-/* SUB JUDUL */
-h2, h3 {
-  margin-top: 0;
-  color: #e3f2f7;
-}
-
-/* INPUT */
-input,
-select,
-textarea {
-  width: 100%;
-  padding: 10px 12px;
-  margin-bottom: 12px;
+.nav-menu li {
+  padding: 12px 15px;
+  margin-bottom: 10px;
   border-radius: 8px;
-  border: none;
-  background: #f2f6f7;
-  color: #000;
-  font-size: 14px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.3s ease;
+  color: rgba(255, 255, 255, 0.7);
 }
 
-/* TEXTAREA */
-textarea {
-  resize: vertical;
-  min-height: 100px;
+.nav-menu li:hover {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
 }
 
-/* READONLY */
-input[readonly],
-textarea[readonly] {
-  background: #e0e7ea;
-  color: #000;
+.nav-menu li.active {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
   font-weight: bold;
 }
 
-/* BUTTON */
-button {
+.sidebar-footer {
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+  text-align: center;
+}
+
+/* AREA KONTEN KANAN */
+.main-content {
+  flex-grow: 1;
+  margin-left: 250px; /* Offset width sidebar */
+  padding: 30px 40px;
+}
+
+.top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.top-header h1 {
+  margin: 0;
+  font-size: 24px;
+  color: #0f172a;
+}
+
+.user-profile {
+  background: #e2e8f0;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* PEMBAGIAN KOLOM (Kiri Form, Kanan Hasil) */
+.content-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 25px;
+  align-items: start;
+}
+
+/* KARTU FORM (MODERN CARD) */
+.card {
+  background: #ffffff;
+  padding: 25px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+  border: 1px solid #e2e8f0;
+}
+
+.card h2 {
+  margin-top: 0;
+  color: #0f172a;
+  font-size: 16px;
+  border-bottom: 2px solid #f1f5f9;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+/* GRID DALAM FORM */
+.form-group-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+/* INPUT STYLING */
+label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748b;
+  margin-bottom: 6px;
+}
+
+input, select, textarea {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  color: #334155;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: #0ea5e9;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* INPUT READONLY & HIGHLIGHT */
+input[readonly], textarea[readonly] {
+  background: #e2e8f0;
+  color: #475569;
+  cursor: not-allowed;
+  font-weight: 600;
+}
+
+.highlight-input input {
+  background: #f0fdfa;
+  color: #0f766e;
+  border-color: #99f6e4;
+}
+
+/* TOMBOL UTAMA */
+.btn-generate {
   width: 100%;
-  padding: 14px;
+  padding: 16px;
   border-radius: 10px;
   border: none;
-  background: #3da9fc;
+  background: linear-gradient(90deg, #0284c7, #0d9488);
   color: #fff;
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
+  margin-top: 10px;
 }
 
-button:hover {
-  background: #2a8bdc;
-  transform: translateY(-1px);
+.btn-generate:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(13, 148, 136, 0.4);
 }
 
-/* LAPORAN AREA */
-#laporanSistem,
+/* AREA LAPORAN KANAN */
+#laporanSistem, #laporanWA {
+  background: #f8fafc;
+  color: #334155;
+  font-family: 'Consolas', monospace;
+  font-size: 13px;
+  border: 1px solid #e2e8f0;
+  min-height: 200px;
+}
+
 #laporanWA {
-  background: #0c1f26;
-  color: #cfd8dc;
-  font-family: Consolas, monospace;
-  font-size: 13px;
+  min-height: 380px;
+}
+
+.btn-copy {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
   border-radius: 8px;
-  padding: 12px;
+  border: none;
+  background: #cbd5e1;
+  color: #334155;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
 }
 
-/* LABEL OPSIONAL (JIKA MAU DIPAKAI) */
-label {
-  font-size: 13px;
-  color: #cfd8dc;
-  margin-bottom: 4px;
-  display: block;
+.btn-copy:hover {
+  background: #94a3b8;
+  color: white;
 }
 
-button[onclick^="copyLaporan"] {
-  margin-top: 8px;
-  background: #455a64;
-  font-size: 14px;
+/* RESPONSIVE (Jika dibuka di HP) */
+@media (max-width: 900px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+  .sidebar {
+    display: none; /* Sembunyikan sidebar di mobile untuk hemat layar */
+  }
+  .main-content {
+    margin-left: 0;
+    padding: 15px;
+  }
+  .form-group-grid {
+    grid-template-columns: 1fr;
+  }
 }
-
-button[onclick^="copyLaporan"]:hover {
-  background: #37474f;
-}
-
