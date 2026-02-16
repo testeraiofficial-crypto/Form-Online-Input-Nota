@@ -2,7 +2,6 @@ function rupiah(n) {
   return "Rp. " + (Number(n) || 0).toLocaleString("id-ID");
 }
 
-// Menghindari eror tulisan 'NaN' jika tanggal kosong
 function formatTanggal(date) {
   if (!date) return "-"; 
   const bulan = ["JANUARI","FEBRUARI","MARET","APRIL","MEI","JUNI","JULI","AGUSTUS","SEPTEMBER","OKTOBER","NOVEMBER","DESEMBER"];
@@ -11,7 +10,6 @@ function formatTanggal(date) {
   return d.getDate() + " " + bulan[d.getMonth()] + " " + d.getFullYear();
 }
 
-// Fitur untuk memunculkan input supplier manual
 document.getElementById("supplier").addEventListener("change", function() {
   const suplLainContainer = document.getElementById("supplierLainContainer");
   if (this.value === "LAINNYA") {
@@ -21,12 +19,10 @@ document.getElementById("supplier").addEventListener("change", function() {
   }
 });
 
-// Event listener keuangan
 document.querySelectorAll("input[type=number]").forEach(el => {
   el.addEventListener("input", hitungKeuangan);
 });
 
-// Otomatis hitung jatuh tempo saat tanggal nota / sistem pembayaran diubah
 function hitungJatuhTempo() {
   const sistem = document.getElementById("pembayaran").value;
   const tglNotaVal = document.getElementById("tanggalNota").value;
@@ -63,7 +59,6 @@ function hitungKeuangan() {
 }
 
 function generateLaporan() {
-  // Ambil elemen
   const elSup = document.getElementById("supplier");
   const elSupLain = document.getElementById("supplierLain");
   const elNomor = document.getElementById("nomorNota");
@@ -77,18 +72,17 @@ function generateLaporan() {
   const elVerif = document.getElementById("verifikator");
   const elDisp = document.getElementById("display");
 
-  // Validasi supplier
   let sup = elSup.value === "LAINNYA" ? elSupLain.value : elSup.value;
   if (!sup) sup = "-";
 
   const laporanSistem = document.getElementById("laporanSistem");
   const laporanWA = document.getElementById("laporanWA");
 
-  // FORMAT 1: LAPORAN SISTEM
+  // FORMAT 1: LAPORAN SISTEM (1 Baris untuk software internal)
   laporanSistem.value = 
 `(${sup}) (NO.NOTA : ${elNomor.value || "-"}) ${elDetail.value.toUpperCase()} (TGL NOTA : ${formatTanggal(elTglNota.value)}) (BARANG DATANG : ${formatTanggal(elTglDatang.value)}) ( SISTEM PEMBAYARAN : ${elBayar.options[elBayar.selectedIndex].text}) (TGL JATUH TEMPO : ${elJatuhTempo.value || "-"}) CHECKER : ${elChecker.value}  VERIFIKATOR : ${elVerif.value} PETUGAS DISPLAY : ${elDisp.value})`.toUpperCase();
 
-  // FORMAT 2: LAPORAN WHATSAPP (Sesuai dengan template yang diminta)
+  // FORMAT 2: LAPORAN WHATSAPP (Sesuai Template Baru)
   laporanWA.value = 
 `*MINIMARKET BANGUNAN PILAR*
 *Jl. Sunan Kudus, Gatak, Rukeman, Tamantirto, Bantul, DIY*
@@ -132,12 +126,12 @@ ${elDetail.value || "-"}
 function copyLaporan(id) {
   const textarea = document.getElementById(id);
   textarea.select();
-  textarea.setSelectionRange(0, 99999); // Untuk perangkat mobile
+  textarea.setSelectionRange(0, 99999);
   
   try {
     document.execCommand("copy");
-    alert("✅ LAPORAN BERHASIL DISALIN");
+    alert("LAPORAN BERHASIL DISALIN");
   } catch (err) {
-    alert("❌ Gagal menyalin teks.");
+    alert("Gagal menyalin teks.");
   }
 }
