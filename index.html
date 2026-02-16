@@ -7,152 +7,193 @@
 </head>
 <body>
 
-<h1>INPUT NOTA BARANG MASUK</h1>
+<div class="dashboard-container">
+  <aside class="sidebar">
+    <div class="logo">
+      <h2>⚡ Pilar Dashboard</h2>
+    </div>
+    <ul class="nav-menu">
+      <li class="active">📝 Input Nota</li>
+      <li>📊 Laporan</li>
+      <li>⚙️ Pengaturan</li>
+    </ul>
+    <div class="sidebar-footer">
+      <p>Minimarket<br>Bangunan Pilar</p>
+    </div>
+  </aside>
 
-<!-- SUBFORM 1 : DATA NOTA -->
-<section>
-<h2>DATA NOTA</h2>
+  <main class="main-content">
+    <header class="top-header">
+      <h1>Input Nota Barang Masuk</h1>
+      <div class="user-profile">Petugas Area</div>
+    </header>
 
-<label>Tanggal Input</label>
-<input type="date" id="tanggalInput">
+    <div class="content-grid">
+      
+      <div class="form-area">
+        <section class="card">
+          <h2>Data Nota</h2>
+          <div class="form-group-grid">
+            <div class="form-group">
+              <label>Tanggal Input</label>
+              <input type="date" id="tanggalInput">
+            </div>
+            
+            <div class="form-group">
+              <label>Supplier</label>
+              <select id="supplier">
+                <option value="">-- Pilih Supplier --</option>
+                <option>UD DWI PUTRA</option>
+                <option>TB SUMBER MAKMUR</option>
+                <option>PT TIRTAKENCANA TATAWARNA</option>
+                <option value="LAINNYA">LAINNYA (Tulis Manual)</option>
+                </select>
+            </div>
+            
+            <div class="form-group full-width" id="supplierLainContainer" style="display: none;">
+              <label>Nama Supplier Baru</label>
+              <input type="text" id="supplierLain" placeholder="Ketik nama supplier non-register...">
+            </div>
 
-<label>Supplier</label>
-<select id="supplier">
-<option value="">-- Pilih Supplier --</option>
-<option>UD DWI PUTRA</option>
-<option>TB SUMBER MAKMUR</option>
-<option>TB MEKAR</option>
-<option>TB MARGA UTAMA</option>
-<option>TB RUKUN MAKMUR</option>
-<option>DEPO UTOMO KERAMIK</option>
-<option>CV GPA</option>
-<option>PT TIRTAKENCANA TATAWARNA</option>
-<option>MITRA SEJATI</option>
-<option>TRIPLEK MAGUWO</option>
-<option>TRIPLEK PAJANGAN</option>
-<option>SJA</option>
-<option>HMS</option>
-<option>KARUNIA LOGAM</option>
-<option>DIN JAYA</option>
-<option>SOLEH SOLIHUN</option>
-<option>MAJU LANCAR</option>
-<option>PANDAI BESI</option>
-<option>CV ANUGERAH PRATAMA</option>
-<option>PT ANUGERAH SENTOSA TUNGGAL</option>
-<option>PT SURYAPRIMA TATAMITRA</option>
-<option>PT MENARA MAS SAKTI</option>
-<option>BERKAH</option>
-<option>SUMBER TALANG</option>
-<option>REZKI AGUNG MANDIRI</option>
-<option>INDACO WARNA DUNIA</option>
-<option>PT CITRA WARNA PELANGI</option>
-<option>HENGKY SOEDIONO</option>
-<option>CAHAYA MANDIRI</option>
-<option>ADEL KUAS</option>
-<option>LESSO SEMARANG</option>
-<option>UD KARUNIA SARI</option>
-<option>LESSO YOGYAKARTA</option>
-<option>APPOLO</option>
-<option>TULIP PAINT</option>
-<option>SHOPEE</option>
-<option>CV MATARAM</option>
-<option>NJA</option>
-<option>PUTRA BORNEO</option>
-<option>INDO MATERIAL SENTOSA</option>
-<option>TOKO LIMAN</option>
-<option>TOKO PLATIK 40</option>
-<option>WELDONE</option>
-<option>SDA</option>
-<option value="LAINNYA">LAINNYA</option>
-</select>
+            <div class="form-group">
+              <label>Nomor Nota</label>
+              <input type="text" id="nomorNota" placeholder="Masukkan No. Nota">
+            </div>
 
-<input type="text" id="supplierLain" placeholder="Isi Supplier Non-Register">
+            <div class="form-group">
+              <label>Tanggal Nota</label>
+              <input type="date" id="tanggalNota">
+            </div>
 
-<label>Nomor Nota</label>
-<input type="text" id="nomorNota">
+            <div class="form-group">
+              <label>Tanggal Barang Datang</label>
+              <input type="date" id="tanggalDatang">
+            </div>
 
-<label>Tanggal Nota</label>
-<input type="date" id="tanggalNota">
+            <div class="form-group">
+              <label>Sistem Pembayaran</label>
+              <select id="pembayaran">
+                <option value="CASH">CASH</option>
+                <option value="1">TEMPO 1 HARI</option>
+                <option value="7">TEMPO 7 HARI</option>
+                <option value="14">TEMPO 14 HARI</option>
+                <option value="30">TEMPO 30 HARI</option>
+                <option value="45">TEMPO 45 HARI</option>
+                <option value="60">TEMPO 60 HARI</option>
+              </select>
+            </div>
 
-<label>Tanggal Barang Datang</label>
-<input type="date" id="tanggalDatang">
+            <div class="form-group">
+              <label>Tanggal Jatuh Tempo</label>
+              <input type="text" id="jatuhTempo" placeholder="Otomatis terisi" readonly>
+            </div>
 
-<label>Sistem Pembayaran</label>
-<select id="pembayaran">
-<option value="CASH">CASH</option>
-<option value="1">TEMPO 1 HARI</option>
-<option value="7">TEMPO 7 HARI</option>
-<option value="14">TEMPO 14 HARI</option>
-<option value="30">TEMPO 30 HARI</option>
-<option value="45">TEMPO 45 HARI</option>
-<option value="60">TEMPO 60 HARI</option>
-</select>
+            <div class="form-group full-width">
+              <label>Detail Barang</label>
+              <textarea id="detailBarang" placeholder="(1) 6 Pcs Prox White Neutral Sealant 330CC&#10;(2) ..."></textarea>
+            </div>
+          </div>
+        </section>
 
-<label>Tanggal Jatuh Tempo</label>
-<input type="text" id="jatuhTempo" readonly>
+        <section class="card">
+          <h2>Data Keuangan</h2>
+          <div class="form-group-grid">
+            <div class="form-group">
+              <label>Nilai Nota</label>
+              <input type="number" id="nilaiNota" placeholder="Rp 0">
+            </div>
+            <div class="form-group">
+              <label>PPN</label>
+              <input type="number" id="ppn" placeholder="Rp 0">
+            </div>
+            <div class="form-group">
+              <label>Biaya Packing/Angkut</label>
+              <input type="number" id="biaya" placeholder="Rp 0">
+            </div>
+            <div class="form-group">
+              <label>Retur (Tdk Sesuai)</label>
+              <input type="number" id="returRusak" placeholder="Rp 0">
+            </div>
+            <div class="form-group">
+              <label>Retur (Kurang)</label>
+              <input type="number" id="returKurang" placeholder="Rp 0">
+            </div>
+            <div class="form-group">
+              <label>Discount A</label>
+              <input type="number" id="diskonA" placeholder="Rp 0">
+            </div>
+            <div class="form-group">
+              <label>Discount B</label>
+              <input type="number" id="diskonB" placeholder="Rp 0">
+            </div>
+            <div class="form-group">
+              <label>Development Fee</label>
+              <input type="number" id="devFee" placeholder="Rp 0">
+            </div>
 
-<h3>DETAIL BARANG</h3>
-<textarea id="detailBarang" placeholder="Contoh: 10 PCS CAT TEMBOK, 2 ROL KABEL"></textarea>
-</section>
+            <div class="form-group highlight-input">
+              <label>Nilai Nota Netto</label>
+              <input type="text" id="notaNetto" placeholder="Rp 0" readonly>
+            </div>
+            <div class="form-group highlight-input">
+              <label>Nilai Nota Sistem</label>
+              <input type="text" id="notaSistem" placeholder="Rp 0" readonly>
+            </div>
+          </div>
+        </section>
 
-<!-- SUBFORM 2 : KEUANGAN -->
-<section>
-<h2>DATA KEUANGAN</h2>
+        <section class="card">
+          <h2>Petugas</h2>
+          <div class="form-group-grid">
+            <div class="form-group">
+              <label>Checker</label>
+              <select id="checker">
+                <option>PAK GHUFRON</option>
+                <option>INDRA</option>
+                <option>IVAN</option>
+                <option>PAK ENDAH</option>
+                <option>MAS TRI</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Verifikator</label>
+              <select id="verifikator">
+                <option>INDRA</option>
+                <option>PAK GHUFRON</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Petugas Display</label>
+              <select id="display">
+                <option>INDRA</option>
+                <option>IVAN</option>
+                <option>PAK ENDAH</option>
+                <option>MAS TRI</option>
+              </select>
+            </div>
+          </div>
+        </section>
+        
+        <button class="btn-generate" onclick="generateLaporan()">GENERATE LAPORAN</button>
+      </div>
 
-<input type="number" id="nilaiNota" placeholder="Nilai Nota">
-<input type="number" id="ppn" placeholder="PPN">
-<input type="number" id="biaya" placeholder="Biaya Packing / Angkut / Bifast">
-<input type="number" id="returRusak" placeholder="Retur Barang Tidak Sesuai">
-<input type="number" id="returKurang" placeholder="Retur Barang Kurang Lengkap">
-<input type="number" id="diskonA" placeholder="Discount A">
-<input type="number" id="diskonB" placeholder="Discount B">
+      <div class="report-area">
+        <section class="card">
+          <h2>Laporan Sistem</h2>
+          <textarea id="laporanSistem" readonly></textarea>
+          <button class="btn-copy" onclick="copyLaporan('laporanSistem')">📋 Copy Laporan Sistem</button>
+        </section>
 
-<input type="text" id="notaNetto" placeholder="Nilai Nota Netto" readonly>
-<input type="number" id="devFee" placeholder="Development Fee">
-<input type="text" id="notaSistem" placeholder="Nilai Nota Terinput Sistem" readonly>
-</section>
+        <section class="card">
+          <h2>Laporan WhatsApp</h2>
+          <textarea id="laporanWA" readonly></textarea>
+          <button class="btn-copy" onclick="copyLaporan('laporanWA')">📋 Copy Laporan WA</button>
+        </section>
+      </div>
 
-<!-- SUBFORM 3 : PETUGAS -->
-<section>
-<h2>PETUGAS</h2>
-
-<select id="checker">
-<option>PAK GHUFRON</option>
-<option>INDRA</option>
-<option>IVAN</option>
-<option>PAK ENDAH</option>
-<option>MAS TRI</option>
-</select>
-
-<select id="verifikator">
-<option>INDRA</option>
-<option>PAK GHUFRON</option>
-</select>
-
-<select id="display">
-<option>INDRA</option>
-<option>IVAN</option>
-<option>PAK ENDAH</option>
-<option>MAS TRI</option>
-</select>
-</section>
-
-<!-- LAPORAN -->
-<section>
-<h2>LAPORAN SISTEM</h2>
-<textarea id="laporanSistem" readonly></textarea>
-<button type="button" onclick="copyLaporan('laporanSistem')">
-  📋 COPY LAPORAN SISTEM
-</button>
-
-<h2>LAPORAN WHATSAPP</h2>
-<textarea id="laporanWA" readonly></textarea>
-<button type="button" onclick="copyLaporan('laporanWA')">
-  📋 COPY LAPORAN WHATSAPP
-</button>
-</section>
-
-<button onclick="generateLaporan()">GENERATE LAPORAN</button>
+    </div>
+  </main>
+</div>
 
 <script src="script.js"></script>
 </body>
